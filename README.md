@@ -1,4 +1,4 @@
-# OAuth Server
+# OAuth Server with Login UI
 
 
 ### Installation
