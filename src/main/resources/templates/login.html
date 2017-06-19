@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" class="uk-height-1-1">
+<head>
+<meta charset="UTF-8"/>
+<title>Login</title>
+<link rel="stylesheet" href="/uaa/scripts/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/uaa/scripts/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="/uaa/scripts/css/login.css"/>
+<link rel="stylesheet" href="/uaa/scripts/css/globel.css"/>
+<script src="/uaa/scripts/js/jquery-3.2.0.min.js"></script>
+<script src="/uaa/scripts/js/bootstrap.min.js"></script>
+<script src="/uaa/scripts/js/fingerprint2.js"></script>
+<script type="text/javascript">
+new Fingerprint2().get(function(result, components){  $('.print').val(result); });
+</script>
+</head>
+<body >
+<div class="container">
+    <div class="row">
+    <!--[if lte IE 9]>
+ <div class="text-center flash__warning">
+   <p>
+     <strong>Warning:</strong> You are using a really old, insecure version of Internet Explorer. You will have a better experience with a newer web browser.
+   </p>
+   <p>
+     Please either use at least Internet Explorer 10, or try a free alternative browser such as <a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank">Google Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank">Mozilla Firefox</a>.
+   </p>
+ </div>
+<![endif]--> 
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Sign in to continue</h1>
+       <p class="text-center text-danger" th:if="${param.error}">
+            Login failed ...
+        </p>
+  		 <p class=" text-center text-danger" th:if="${param.noredirect}">
+             No url redirect destination was provided in url.
+        </p>
+        <p class=" text-center text-success" th:if="${param.logout}">
+            Logout succeeded.
+        </p>
+         <p class=" text-center text-success" th:if="${param.passwordreset}">
+            Password reset succeeded.
+        </p>
+            <div class="account-wall">
+                <img class="profile-img"  src="/uaa/scripts/images/avatar_2x.png" alt=""/>
+                <form class="form-signin" method="post" th:action="@{/login}">
+                 <input type="text" class="form-control" placeholder="Username" name="username" tabindex="1" autofocus="true"/>
+                 <input type="password" class="form-control" placeholder="Password" name="password" tabindex="2" />
+                 <input type="text" class="form-control print hidden"  name="print" />
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Sign in</button>
+                <a href="/uaa/user/reset" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                  </form>
+            </div>
+            <a href="/uaa/user/create" class="text-center new-account">Create an account </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

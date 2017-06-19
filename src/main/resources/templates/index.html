@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Account Details</title>
+
+   	<link rel="stylesheet" href="/uaa/scripts/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/uaa/scripts/css/font-awesome.min.css"/>
+     <link rel="stylesheet" href="/uaa/scripts/css/app/homeaccount.css"/>
+ 
+    <link rel="stylesheet" href="/uaa/scripts/css/globel.css"/>
+    <script src="/uaa/scripts/js/jquery-3.2.0.min.js"></script>
+    <script src="/uaa/scripts/js/bootstrap.min.js"></script>
+
+  <script src="/uaa/scripts/js/angular.min.js"></script>
+  <script src="/uaa/scripts/js/app/homeaccount.js"></script>
+
+
+	<style type="text/css">
+	
+	.profile-img
+{
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+	
+	</style>
+
+
+
+
+</head>
+
+<body>
+<div ng-app="myProfile" ng-controller="myProfileCtrl"> 
+
+
+<div class="container">
+<div class="row">
+	 <div class=" logout-gap col-md-offset-10 col-md-2 col-lg-offset-10 col-lg-2">
+ 						<form th:action="@{/logout}" method="post">
+				            <button class="btn btn-primary">Logout</button>
+				        </form>
+				        </div>
+</div>
+
+	<div class="row">
+		<div class="form-gap col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+    	 <div class="well profile">
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{{profile[0].name}}</h2>
+                    <p><strong>Display Name: </strong> {{profile[0].name}}</p>
+                    <p><strong>Title: </strong> Worker Bee </p>
+                    <p><strong>Email: </strong> {{profile[0].email}} </p>
+                    <p><strong>Phone: </strong> {{profile[0].phone}} </p>
+                    <p><strong>Address: </strong> 25 south stockton </p>
+            
+                    <p><strong>Roles: </strong>
+                        <span class="tags">User Read</span> 
+                        <span class="tags">User Write</span>
+                        <span class="tags">Local Admin</span>
+                        <span class="tags">Globel Admin</span>
+                    </p>
+                </div>             
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <img class="profile-img"  src="/uaa/scripts/images/avatar_2x.png" alt=""/>
+                </div>
+            </div>            
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Request </button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+            
+                    <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Edit Profile </button>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <div class="btn-group dropup btn-block">
+                      <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                      </button>
+                      <ul class="dropdown-menu text-left" role="menu">
+                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
+                        <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-xs-12  text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+               
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                  
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                     
+                </div>
+            </div>
+  
+    	 </div>                 
+		</div>
+	</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+var app = angular.module('myProfile', []);
+app.controller('myProfileCtrl', function($scope, $http) {
+    $http.get("https://jsonplaceholder.typicode.com/users")
+    .then(function(response) {
+        $scope.profile = response.data;
+    });
+});
+</script>
+
+
+</body>
+</html>

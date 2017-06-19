@@ -1,0 +1,47 @@
+#spring
+spring:
+  application:
+    name: oauth
+  mvc:
+    favicon:
+      enabled: false
+  
+
+---
+#server
+server:
+  port: 8080
+  context-path: /uaa
+
+
+---
+#migrations
+flyway:
+  table: _schema_history
+  baseline-on-migrate: true
+
+---
+#database
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=OAuth
+    username: oauth
+    password: oauth#1234
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    initialize: true
+---
+#app
+app:
+  name: name_of_email
+  smtp: smtp.test.com
+  smtpfrom:  noreply@test.com
+---
+#logging
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file: /application.log
+  level:
+     org.springframework.security: INFO
+
